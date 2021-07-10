@@ -11,43 +11,53 @@ app.use(morgan('common'));
 let topMovies = [
     {
       title: 'Inception',
-      director: 'Christopher Nolan'
+      director: 'Christopher Nolan',
+      genre: 'Sci-Fi'
     },
     {
       title: 'Lord of the Rings',
-      director: 'Peter Jackson'
+      director: 'Peter Jackson',
+      genre: 'fiction'
     },
     {
       title: 'The Matrix',
-      director: 'Lana Wachowski'
+      director: 'Lana Wachowski',
+      genre: 'Sci-fi'
     },
     {
         title: 'The Avengers',
-        director: 'Anthony Russo'
+        director: 'Anthony Russo',
+        genre: 'Super-Heroes'
       },
       {
         title: 'The Silence Of The Lambs',
-        director: 'Jonathan Demme'
+        director: 'Jonathan Demme',
+        genre: 'Suspense-Thriller'
       },
       {
         title: 'Terminator',
-        director: 'James Cameron'
+        director: 'James Cameron',
+        genre: 'Action'
       },
       {
         title: 'The Prestige',
-        director: 'Christopher Nolan'
+        director: 'Christopher Nolan',
+        genre: 'Suspense-Thriller'
       },
       {
         title: 'Shutter Island',
-        director: 'Martin Scorsese'
+        director: 'Martin Scorsese',
+        genre:'Suspense-Thriller'
       },
       {
         title: 'The Fugitive',
-        director: 'Andrew Davis'
+        director: 'Andrew Davis',
+        genre: 'Suspense-Thriller'
       },
       {
         title: 'The Shack',
-        director: 'Stuart Hazeldine'
+        director: 'Stuart Hazeldine',
+        genre: 'Feel-Good'
       }
   ];
 
@@ -71,8 +81,47 @@ app.use((err, req, res, next) => {
     res.status(500).send('Oops!Something Went Wrong!');
   });
 
+//For returning data about a single movie
+  app.get('/topMovies/title', (req, res) => {
+    res.send('Successful GET request returning data on a single movie by title');
+  });
+
+//For returning data about a genre
+app.get('/topMovies/genre', (req, res) => {
+    res.send('Successful GET request returning data on movies by genres');
+});
+
+//For returning data about a director by name
+app.get('/topMovies/director', (req, res) => {
+  res.send('Successful GET request returning data on a director');
+});
+
+//For allowing new users to register
+app.post('/topMovies/register', (req, res) => {
+  res.send('Registeration Successful!');
+});
+
+//For allowing users to update their user info
+app.put('/topMovies/update', (req, res) => {
+  res.send('Successfully updated your information!')
+});
+
+//For allowing users to add a movie to their list of favorite movies-text
+app.post('/topMovies/add', (req, res) => {
+  res.send('Successfully added your new favourite movie to your list of favorites!')
+});
+
+//For allowing users to remove a movie from their list of favorites movies-text
+app.delete('/topMovies/delete', (req, res) => {
+  res.send('Successfully deleted from your list of favourites!')
+});
+
+//For allowing existing users to deregister-text
+app.delete('/topMovies/deregister', (req, res) => {
+  res.send('User details successsfully removed!')
+});
+
 //Listening requests
 app.listen(8080, () =>{
     console.log('Your app is listening on port 8080.');
   });
-
