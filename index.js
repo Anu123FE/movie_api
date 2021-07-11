@@ -113,6 +113,7 @@ app.get('/users', (req, res) => {
 app.put('/users/update/:id', (req, res) => {
   let userId =  users.findIndex((u)=>u.id==req.params.id);
   users.slice(userId,1, {...req.body});
+  res.send('Changes saved successfully!');
   res.send(users);
 });
 
