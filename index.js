@@ -129,7 +129,8 @@ app.delete('/favourite/delete/:title', (req, res) => {
 });
 
 //For allowing existing users to deregister-text
-app.delete('/movies/deregister/:deregister', (req, res) => {
+app.delete('/users/deregister/:id', (req, res) => {
+  users.filter((m) => m.id !=req.params.id);
   res.send('User details successsfully removed!')
 });
 
