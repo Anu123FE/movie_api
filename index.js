@@ -5,10 +5,11 @@ const app = express();
 
 //Using the Morgan middleware library to log all requests
 app.use(morgan('common'));
-
+app.use(express.json()); 
 //JSON Data containing list of top 10 movies
-
-let topMovies = [
+let favMovies = [];
+let users = [];
+let movies = [
     {
       title: 'Inception',
       director: 'Christopher Nolan',
@@ -64,7 +65,7 @@ let topMovies = [
 //GET request for returning the JSON movie data
 
   app.get('/movies', (req, res) => {
-    res.json(topMovies);
+    res.json(movies);
   });
 
 //GET request for returning the personal message
@@ -82,42 +83,53 @@ app.use((err, req, res, next) => {
   });
 
 //For returning data about a single movie
-  app.get('/topMovies/title', (req, res) => {
-    res.send('Successful GET request returning data on a single movie by title');
+  app.get('/movies/title/:title', (req, res) => {
+    const movie = movies.find((m)=> m.title == req.params.title);
+    res.send(movie);
   });
 
 //For returning data about a genre
-app.get('/topMovies/genre', (req, res) => {
-    res.send('Successful GET request returning data on movies by genres');
+app.get('/movies/genre/:genre', (req, res) => {
+  const movies_ = movies.filter((m)=> m.genre == req.params.genre);
+  res.send(movies_);
 });
 
 //For returning data about a director by name
-app.get('/topMovies/director', (req, res) => {
-  res.send('Successful GET request returning data on a director');
+app.get('/movies/director/:director', (req, res) => {
+  const director = movies.filter((m)=> m.director == req.params.director);
+  res.send(director);
 });
 
 //For allowing new users to register
-app.post('/topMovies/register', (req, res) => {
+app.post('/users/register', (req, res) => {
+  users.push(req.body);
   res.send('Registeration Successful!');
+});
+app.get('/users', (req, res) => {
+  res.send(users);
 });
 
 //For allowing users to update their user info
-app.put('/topMovies/update', (req, res) => {
-  res.send('Successfully updated your information!')
+app.put('/users/update/:id', (req, res) => {
+  let userId =  users.findIndex((u)=>u.id==req.params.id);
+  users.slice(userId,1, {...req.body});
+  res.send(users);
 });
 
 //For allowing users to add a movie to their list of favorite movies-text
-app.post('/topMovies/add', (req, res) => {
-  res.send('Successfully added your new favourite movie to your list of favorites!')
+app.post('/favourite/add', (req, res) => {
+  favMovies.push(req.body);
+  res.send(favMovies);
 });
 
 //For allowing users to remove a movie from their list of favorites movies-text
-app.delete('/topMovies/delete', (req, res) => {
-  res.send('Successfully deleted from your list of favourites!')
+app.delete('/favourite/delete/:title', (req, res) => {
+  const favs = favMovies.filter((m) => m.title !=req.params.title);
+  res.send(favs);
 });
 
 //For allowing existing users to deregister-text
-app.delete('/topMovies/deregister', (req, res) => {
+app.delete('/movies/deregister/:deregister', (req, res) => {
   res.send('User details successsfully removed!')
 });
 
