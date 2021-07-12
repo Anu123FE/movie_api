@@ -7,7 +7,6 @@ const app = express();
 app.use(morgan('common'));
 app.use(express.json()); 
 //JSON Data containing list of top 10 movies
-let favMovies = [];
 let users = [
   {
     id:1,
@@ -139,7 +138,7 @@ app.put('/users/update/:id', (req, res) => {
   res.send(users);
 });
 
-//For allowing users to add a movie to their list of favorite movies-text
+//For allowing users to add a movie to their list of favorite movies
 app.post('/favourite/add/:id', (req, res) => {
   const user = users.find((u) => u.id ==req.params.id);
   user.favMovies.push(req.body);
