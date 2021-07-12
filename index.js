@@ -8,7 +8,29 @@ app.use(morgan('common'));
 app.use(express.json()); 
 //JSON Data containing list of top 10 movies
 let favMovies = [];
-let users = [];
+let users = [
+  {
+    id:1,
+    fullname: 'John Doe',
+    email: 'johndoe@mail.com',
+    favMovies: [{
+      title: 'Inception',
+      director: 'Christopher Nolan',
+      genre: 'Sci-Fi'
+    }]
+  },
+  {
+    id:2,
+    fullname: 'Jane Doe',
+    email: 'janedoe@mail.com',
+    favMovies: [{
+      title: 'Inception',
+      director: 'Christopher Nolan',
+      genre: 'Sci-Fi'
+    }]
+  }
+
+];
 let movies = [
     {
       title: 'Inception',
@@ -118,15 +140,18 @@ app.put('/users/update/:id', (req, res) => {
 });
 
 //For allowing users to add a movie to their list of favorite movies-text
-app.post('/favourite/add', (req, res) => {
-  favMovies.push(req.body);
-  res.send(favMovies);
+app.post('/favourite/add/:id', (req, res) => {
+  const user = users.find((u) => u.id ==req.params.id);
+  user.favMovies.push(req.body);
+  res.send(user);
 });
 
 //For allowing users to remove a movie from their list of favorites movies-text
-app.delete('/favourite/delete/:title', (req, res) => {
-  const favs = favMovies.filter((m) => m.title !=req.params.title);
-  res.send(favs);
+app.delete('/favourite/delete/:id/:title', (req, res) => {
+  const user = users.find((u) => u.id ==req.params.id);
+  const favs = user.favMovies.filter((m)=>m.title != req.params.title)
+  user.favMovies = [...favs];
+  res.send(user);
 });
 
 //For allowing existing users to deregister-text
