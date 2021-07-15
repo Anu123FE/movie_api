@@ -39,7 +39,7 @@ let movies = [
     {
       title: 'Lord of the Rings',
       director: 'Peter Jackson',
-      genre: 'fiction'
+      genre: 'Super-Heroes'
     },
     {
       title: 'The Matrix',
