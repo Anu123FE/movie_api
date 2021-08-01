@@ -40,36 +40,80 @@
                 <td>GET</td>
                 <td>:title</td>
                 <td>None</td>
-                <td>A JSON object holding all the data about a single movie. Example:<br>
-                    {
-                        title: 'Inception',
-                        director: 'Christopher Nolan',
-                        genre: 'Sci-Fi'
-                      }      
+                <td>An array object holding all the data about a single movie. Example:<br>
+                    [
+                          {
+                            "Genre": {
+                                       "Name": "Mystery",
+                                        "Description": "A mystery film is a genre of film that revolves around the solution of a problem or a crime. It focuses on the efforts of the detective, private investigator or amateur sleuth to solve the mysterious circumstances of an issue by means of clues, investigation, and clever deduction."
+                                      },
+                            "Director": {
+                                          "Name": "Christopher Nolan",
+                                           "Bio": "Christopher Nolan is a British-American film director, producer, and screenwriter. Thanks to his stylized, time-bending renovation of film noir conventions, director Christpher Nolan established himself as a creator of psychologically demanding films that defied classification.",
+                                           "Birth": "July 30, 1970",
+                                           "Death": ""
+                                        },
+                            "Actors": [],
+                            "_id": "604fb2e73c12eaccf1a9f251",
+                            "Title": "The Prestige",
+                            "Description": "Two friends and fellow magicians become bitter enemies after a sudden tragedy. As they devote themselves to this rivalry, they make sacrifices that bring them fame but with terrible consequences.",
+                            "ImagePath": "https://www.imdb.com/title/tt0482571/mediaviewer/rm4031813632/",
+                             "Featured": false,
+                             "Bio": "Update Christoper Nolan is amazing."<br>
+                         }
+                    ]
                 </td>
             </tr>
             <tr>
                 <td>Return data about a genre by name</td>
-                <td>movies/genre/[genre]</td>
+                <td>movies/genre/[Name]</td>
                 <td>GET</td>
                 <td>:genre</td>
                 <td>None</td>
-                <td>A JSON object format containing movies belonging to a specific genre. Example: <br>
-                    {
-                        title: 'Shutter-Island',
-                        director: 'Martin Scorsese',
-                        genre: 'Suspense-Thriller'
-                      } <br>
-                    {
-                          title: 'The Fugitive',
-                          director: 'Andrew Davis',
-                          genre: 'Suspense-Thriller'
-                      }
+                <td>An array containing movies belonging to a specific genre. Example: <br>
+                    [
+                      {
+                        "Genre": {
+                           "Name": "Action",
+                           "Description": "Action film is a film genre in which the protagonist or protagonists are thrust into a series of events that typically include violence, extended fighting, physical feats, rescues and frantic chases. Action films tend to feature a mostly resourceful hero struggling against incredible odds, which include life-threatening situations, a dangerous villain, or a pursuit which usually concludes in victory for the hero (though a small number of films in this genre have ended in the victory for the villain instead)."
+                                  },
+                        "Director": {
+                           "Name": "Chad Stahelski",
+                           "Bio": "Chad Stahelski is an American stuntman and film director. He is known for his work on Buffy the Vampire Slayer and directing the 2014 film John Wick along with David Leitch, as well as solo directing its two sequels.",
+                           "Birth": "September 20, 1968",
+                           "Death": ""
+                                    },
+                        "Actors": [],
+                        "_id": "604fb2dd3c12eaccf1a9f250",
+                        "Title": "John Wick",
+                        "Description": "A retired hitman seeking vengeance for the killing of the dog given to him by his recently deceased wife, and for stealing his car.",
+                        "ImagePath": "https://www.imdb.com/title/tt2911666/mediaviewer/rm1723909376/",
+                        "Featured": true
+                     },<br>
+                  {
+                      "Genre": {
+                          "Name": "Action",
+                          "Description": "Action film is a film genre in which the protagonist or protagonists are thrust into a series of events that typically include violence, extended fighting, physical feats, rescues and frantic chases. Action films tend to feature a mostly resourceful hero struggling against incredible odds, which include life-threatening situations, a dangerous villain, or a pursuit which usually concludes in victory for the hero (though a small number of films in this genre have ended in the victory for the villain instead)."
+                               },
+                      "Director": {
+                          "Name": "Joe Russo",
+                           "Bio": "Anthony Russo and Joseph Russo collectively known as the Russo brothers (ROO-so), are American directors, producers, screenwriters, and actors. They direct most of their work together.",
+                           "Birth": "July 8, 1971",
+                            "Death": ""
+                                   },
+                           "Actors": [],
+                           "_id": "604fb2d23c12eaccf1a9f24f",
+                           "Title": "Avengers Infinity War",
+                           "Description": "The Avengers must stop Thanos, an intergalactic warlord, from getting his hands on all the infinity stones. However, Thanos is prepared to go to any lengths to carry out his insane plan.",
+                            "ImagePath": "https://www.imdb.com/title/tt4154756/mediaviewer/rm4044245504/",
+                            "Featured": false
+                   }<br>
+                ]<br>
                 </td>
             </tr>
             <tr>
                 <td>Return data about a director by name</td>
-                <td>/movies/director/[director]</td>
+                <td>/movies/director/[Name]</td>
                 <td>GET</td>
                 <td>:director</td>
                 <td>None</td>

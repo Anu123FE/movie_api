@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Models = require('./models.js');
+const bodyParser = require('body-parser');
 
 const Movie = Models.Movie;
 const Users = Models.User;
@@ -9,12 +10,13 @@ const express = require('express');
       morgan = require('morgan');
 
 const app = express();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //Using the Morgan middleware library to log all requests
 app.use(morgan('common'));
 app.use(express.json()); 
 
-//JSON Data containing list of top 10 movies
 //GET request for returning the JSON movie data
 
   app.get('/movies', (req, res) => {
@@ -49,15 +51,19 @@ app.use((err, req, res, next) => {
   });
 
 //For returning data about a genre
-app.get('/movies/genre/:genre', (req, res) => {
-  const movies_ = movies.filter((m)=> m.genre == req.params.genre);
-  res.send(movies_);
+app.get('/movies/genre/:Name', (req, res) => {
+    Movie.find({"Genre.Name" : req.params.Name}).then(movie=>{
+    res.status(200).send(movie)
+    
+  }).catch(err=>res.status(404).send(err.message));
 });
 
 //For returning data about a director by name
-app.get('/movies/director/:director', (req, res) => {
-  const director = movies.filter((m)=> m.director == req.params.director);
-  res.send(director);
+app.get('/movies/director/:Name', (req, res) => {
+    Movie.find({"Director.Name" : req.params.Name}).then(movie=>{
+      res.status(200).send(movie)
+      
+    }).catch(err=>res.status(404).send(err.message));
 });
 
 //For allowing new users to register
