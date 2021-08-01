@@ -38,7 +38,7 @@
                 <td>Return data about a single movie by title to the user</td>
                 <td>/movies/[title]</td>
                 <td>GET</td>
-                <td>:title</td>
+                <td>:Title</td>
                 <td>None</td>
                 <td>An array object holding all the data about a single movie. Example:<br>
                     [
@@ -65,10 +65,10 @@
                 </td>
             </tr>
             <tr>
-                <td>Return data about a genre by name</td>
+                <td>Return data about the genre by Name</td>
                 <td>movies/genre/[Name]</td>
                 <td>GET</td>
-                <td>:genre</td>
+                <td>:Name</td>
                 <td>None</td>
                 <td>An array containing movies belonging to a specific genre. Example: <br>
                     [
@@ -111,6 +111,24 @@
                 ]<br>
                 </td>
             </tr>
+            
+            <tr>
+                <td>Return data about a director by name</td>
+                <td>/movies/director/[Name]</td>
+                <td>GET</td>
+                <td>:director</td>
+                <td>None</td>
+                <td>A JSON format data holding all the data about a director by name. Example:<br>
+                    {
+                        name: 'Christopher Nolan',
+                        bio: 'A short Bio',
+                        dob: '30th July'
+                      }
+                    </td>
+            </tr>
+
+
+
             <tr>
                 <td>Return data about a director by name</td>
                 <td>/movies/director/[Name]</td>
@@ -166,7 +184,43 @@
                 <td>POST</td>
                 <td>:register</td>
                 <td>Data containing new user details</td>
-                <td>A text response indicating that the registeration was successful</td>
+                <td>A JSON format response like below: <br> 
+                    {
+                        ID: Integer,
+                        Username: String,
+                        Password: String,
+                        Email: String,
+                        Birthday: Date
+                    }
+                </td>
+            </tr>
+
+            <tr>
+                <td>Get All The Users</td>
+                <td>/user</td>
+                <td>GET</td>
+                <td>None</td>
+                <td>None</td>
+                <td>A JSON format list containing all the users with their details</td>
+            </tr>
+
+            <tr>
+                <td>Get 1 User By Username</td>
+                <td>/user/[USername]</td>
+                <td>GET</td>
+                <td>:Username</td>
+                <td>None</td>
+                <td>A JSON format list containing all the details of 1 user whose username is searched like so:<br>
+                    {
+                        "FavoriteMovies": [],
+                        "_id": "6106ee7627143352d02e3100",
+                        "Username": "Nair",
+                        "Password": "123ABC",
+                        "Email": "nair@yahoo.com",
+                        "__v": 0
+                    }
+                
+                </td>
             </tr>
 
             <tr>

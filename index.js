@@ -50,30 +50,81 @@ app.use((err, req, res, next) => {
     }).catch(err=>res.status(404).send(err.message))
   });
 
-//For returning data about a genre
-app.get('/movies/genre/:Name', (req, res) => {
-    Movie.find({"Genre.Name" : req.params.Name}).then(movie=>{
-    res.status(200).send(movie)
+//For returning data about all the movies belonging to a genre
+//app.get('/movies/moviegenre/:Name', (req, res) => {
+    //Movie.find({"Genre.Name" : req.params.Name}).then(movie=>{
+    //res.status(200).send(movie)
     
-  }).catch(err=>res.status(404).send(err.message));
+  //}).catch(err=>res.status(404).send(err.message));
+//});
+
+//For returning data about the genre by Name
+app.get('/movies/genre/:Name', (req, res) => {
+  Movie.find({"Genre.Name" : req.params.Name}).then(movie=>{
+  res.status(200).send(movie.Genre);
+}).catch(err=>res.status(404).send(err.message));
 });
 
 //For returning data about a director by name
 app.get('/movies/director/:Name', (req, res) => {
     Movie.find({"Director.Name" : req.params.Name}).then(movie=>{
-      res.status(200).send(movie)
-      
+      res.status(200).send(movie.Director);
     }).catch(err=>res.status(404).send(err.message));
 });
 
 //For allowing new users to register
 app.post('/users/register', (req, res) => {
-  users.push(req.body);
-  res.send('Registeration Successful!');
+  Users.findOne({ Username: req.body.Username})
+     .then((user) => {
+       if (user) {
+           return res.status(400).send(req.body.Username + 'already exists');
+       } else {
+           Users
+             .create({
+               Username: req.body.Username,
+               Password: req.body.Password,
+               Email: req.body.Email,
+               Birthday: req.body.Birthday
+             })
+             .then((user) => {res.status(201).json(user) })
+             .catch((error) => {
+               console.error(error);
+               res.status(500).send('Error: ' + error);
+             })
+
+            }
+       })
+       .catch((error) => {
+         console.error(error);
+         res.status(500).send('Error": ' + error);
+       });
+     });
+
+//For getting all the users
+app.get('/user', (req, res) => {
+  Users.find()
+    .then((user) => {
+      res.status(201).json(user);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error:' + error);
+    });
 });
-app.get('/users', (req, res) => {
-  res.send(users);
+
+//For getting 1 user by Username
+app.get('/user/:Username', (req, res) => {
+  Users.findOne({ Username: req.params.Username })
+    .then((user) => {
+      res.json(user);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Error:' + error);
+    });
 });
+
+
 
 //For allowing users to update their user info
 app.put('/users/update/:id', (req, res) => {
