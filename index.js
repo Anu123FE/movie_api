@@ -18,7 +18,7 @@ app.use(express.json());
 //GET request for returning the JSON movie data
 
   app.get('/movies', (req, res) => {
-    const movies = Movie.find().then(movie=>{
+    Movie.find().then(movie=>{
 
       res.status(200).send(movie)
       
@@ -41,8 +41,11 @@ app.use((err, req, res, next) => {
 
 //For returning data about a single movie
   app.get('/movies/title/:title', (req, res) => {
-    const movies = Movie.find({title : req.params.title});
-    res.send(movie);
+   Movie.find({Title : req.params.title}).then(movie=>{
+
+      res.status(200).send(movie)
+      
+    }).catch(err=>res.status(404).send(err.message))
   });
 
 //For returning data about a genre
