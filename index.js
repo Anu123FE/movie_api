@@ -5,6 +5,10 @@ const bodyParser = require('body-parser');
 const Movie = Models.Movie;
 const Users = Models.User;
 mongoose.connect('mongodb://localhost:27017/moviedb', { useNewUrlParser: true, useUnifiedTopology: true });
+//Make Mongoose use `findOneAndUpdate()`. Note that this option is `true`
+// by default, you need to set it to false.
+mongoose.set('useFindAndModify', false);
+
 
 const express = require('express');
       morgan = require('morgan');
@@ -124,30 +128,58 @@ app.get('/user/:Username', (req, res) => {
     });
 });
 
-
-
-//For allowing users to update their user info
-app.put('/users/update/:id', (req, res) => {
-  let userId =  users.findIndex((u)=>u.id==req.params.id);
-  users.slice(userId,1, {...req.body});
-  res.send('Changes saved successfully!');
-  res.send(users);
+//For allowing users to update their user info by searching by Username
+app.put('/users/:Username', (req, res) => {
+  Users.findOneAndUpdate({ USername: req.params.Username }, { $set: 
+    {
+      Username: req.body.Username,
+      Password: req.body.Password,
+      Email: req.body.Email,
+      Birthday: req.body.Birthday
+    }
+  },
+  { new: true },//makes sure the updated document is returned
+  (err, updatedUser) => {
+    if(err) {
+      console.error(err);
+      res.status(500).send('Error: ' + error);
+    }else {
+      res.json(updatedUser);
+    }
+  });
 });
 
 //For allowing users to add a movie to their list of favorite movies
-app.post('/favourite/add/:id', (req, res) => {
-  const user = users.find((u) => u.id ==req.params.id);
-  user.favMovies.push(req.body);
-  res.send(user);
+app.post('/users/:Username/movies/:MovieID', (req, res) => {
+  Users.findOneAndUpdate({ Username: req.params.Username }, {
+    $push: { FavoriteMovies: req.params.MovieID }
+  },
+  { new: true },
+  (err, updatedUser) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Error:' + error);
+    } else {
+      res.json(updatedUser);
+    }
+  });
 });
 
-//For allowing users to remove a movie from their list of favorites movies-text
-app.delete('/favourite/delete/:id/:title', (req, res) => {
-  const user = users.find((u) => u.id ==req.params.id);
-  const favs = user.favMovies.filter((m)=>m.title != req.params.title)
-  user.favMovies = [...favs];
-  res.send(user);
-});
+//For allowing users to remove a movie from their list of favorites movies
+  app.delete('/users/:Username/movies/:MovieID', (req, res) => {
+    Users.findOneAndUpdate({ Username: req.params.Username }, {
+      $pull: { FavoriteMovies: req.params.MovieID }
+    },
+    { new: true },
+    (err, updatedUser) => {
+      if (err) {
+        console.error(err);
+        res.status(500).send('Error:' + error);
+      } else {
+        res.json(updatedUser);
+      }
+    });
+  });
 
 //For allowing existing users to deregister-text
 app.delete('/users/deregister/:id', (req, res) => {

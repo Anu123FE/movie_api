@@ -146,35 +146,23 @@
 
             <tr>
                 <td>Allow users to add a movie to their list of favorites</td>
-                <td>/favourite/add/[id]/[title]</td>
+                <td>/users/:Username/movies/:MovieID</td>
                 <td>POST</td>
-                <td>:add</td>
-                <td>A JSON format data containing all the new data about the movie to be added. Example:<br>
+                <td>:MovieID</td>
+                <td>None</td>
+                <td>A JSON format data containing the user's details with the favorite movies including the newly added one like so: <br>
                     {
-                    title: 'Wrath Of Man',
-                    director: 'Guy Ritchie',
-                    genre: 'Action-Thriller'
+                        "FavoriteMovies": [
+                            "604fb3063c12eaccf1a9f253",
+                            "604fb2f53c12eaccf1a9f252",
+                            "604fb32c3c12eaccf1a9f256"
+                        ],
+                        "_id": "604fc86c3c12eaccf1a9f25b",
+                        "Username": "jondoe4",
+                        "Password": "passcode1",
+                        "Email": "jondoe4@yahoo.ca",
+                        "Birthday": "1976-10-23T00:00:00.000Z"
                     }
-                </td>
-                <td>A JSON format data containing the newly added movie details. <br>
-                    {
-                        "id": 1,
-                        "fullname": "John Doe",
-                        "email": "johndoe@mail.com",
-                        "favMovies": [
-                            {
-                                "title": "Inception",
-                                "director": "Christopher Nolan",
-                                "genre": "Sci-Fi"
-                            },
-                            {
-                                "title": "Wrath Of Man",
-                                "director": "Guy Ritchie",
-                                "genre": "Action-Thriller"
-                            }
-                        ]
-                    }
-                
                 </td>
             </tr>
 
@@ -206,7 +194,7 @@
 
             <tr>
                 <td>Get 1 User By Username</td>
-                <td>/user/[USername]</td>
+                <td>/user/[Username]</td>
                 <td>GET</td>
                 <td>:Username</td>
                 <td>None</td>
@@ -234,11 +222,24 @@
 
             <tr>
                 <td>Allow users to remove a movie from their list of favorites</td>
-                <td>/favourite/delete/[id]/[title]</td>
+                <td>/users/:Username/movies/[MovieID]</td>
                 <td>DELETE</td>
-                <td>:id, :title</td>
+                <td>MovieID</td>
                 <td>None</td>
-                <td>An array without the removed movie</td>
+                <td>A JSON format data containing the user's details with the favorite movies excluding the newly removed one like so: <br>
+
+                    {
+                        "FavoriteMovies": [
+                            "604fb3063c12eaccf1a9f253",
+                            "604fb2f53c12eaccf1a9f252"
+                        ],
+                        "_id": "604fc86c3c12eaccf1a9f25b",
+                        "Username": "jondoe4",
+                        "Password": "passcode1",
+                        "Email": "jondoe4@yahoo.ca",
+                        "Birthday": "1976-10-23T00:00:00.000Z"
+                    }
+                </td>
             </tr>
 
             <tr>
