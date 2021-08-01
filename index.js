@@ -1,3 +1,10 @@
+const mongoose = require('mongoose');
+const Models = require('./models.js');
+
+const Movie = Models.Movie;
+const Users = Models.User;
+mongoose.connect('mongodb://localhost:27017/moviedb', { useNewUrlParser: true, useUnifiedTopology: true });
+
 const express = require('express');
       morgan = require('morgan');
 
@@ -6,87 +13,16 @@ const app = express();
 //Using the Morgan middleware library to log all requests
 app.use(morgan('common'));
 app.use(express.json()); 
+
 //JSON Data containing list of top 10 movies
-let users = [
-  {
-    id:1,
-    fullname: 'John Doe',
-    email: 'johndoe@mail.com',
-    favMovies: [{
-      title: 'Inception',
-      director: 'Christopher Nolan',
-      genre: 'Sci-Fi'
-    }]
-  },
-  {
-    id:2,
-    fullname: 'Jane Doe',
-    email: 'janedoe@mail.com',
-    favMovies: [{
-      title: 'Inception',
-      director: 'Christopher Nolan',
-      genre: 'Sci-Fi'
-    }]
-  }
-
-];
-let movies = [
-    {
-      title: 'Inception',
-      director: 'Christopher Nolan',
-      genre: 'Sci-Fi'
-    },
-    {
-      title: 'Lord of the Rings',
-      director: 'Peter Jackson',
-      genre: 'Super-Heroes'
-    },
-    {
-      title: 'The Matrix',
-      director: 'Lana Wachowski',
-      genre: 'Sci-fi'
-    },
-    {
-        title: 'The Avengers',
-        director: 'Anthony Russo',
-        genre: 'Super-Heroes'
-      },
-      {
-        title: 'The Silence Of The Lambs',
-        director: 'Jonathan Demme',
-        genre: 'Suspense-Thriller'
-      },
-      {
-        title: 'Terminator',
-        director: 'James Cameron',
-        genre: 'Action'
-      },
-      {
-        title: 'The Prestige',
-        director: 'Christopher Nolan',
-        genre: 'Suspense-Thriller'
-      },
-      {
-        title: 'Shutter Island',
-        director: 'Martin Scorsese',
-        genre:'Suspense-Thriller'
-      },
-      {
-        title: 'The Fugitive',
-        director: 'Andrew Davis',
-        genre: 'Suspense-Thriller'
-      },
-      {
-        title: 'The Shack',
-        director: 'Stuart Hazeldine',
-        genre: 'Feel-Good'
-      }
-  ];
-
 //GET request for returning the JSON movie data
 
   app.get('/movies', (req, res) => {
-    res.json(movies);
+    const movies = Movie.find().then(movie=>{
+
+      res.status(200).send(movie)
+      
+    }).catch(err=>res.status(404).send(err.message))
   });
 
 //GET request for returning the personal message
@@ -105,7 +41,7 @@ app.use((err, req, res, next) => {
 
 //For returning data about a single movie
   app.get('/movies/title/:title', (req, res) => {
-    const movie = movies.find((m)=> m.title == req.params.title);
+    const movies = Movie.find({title : req.params.title});
     res.send(movie);
   });
 
