@@ -8,7 +8,6 @@ mongoose.connect('mongodb://localhost:27017/moviedb', { useNewUrlParser: true, u
 
 const express = require('express');
       morgan = require('morgan');
-
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -17,6 +16,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('common'));
 app.use(express.json()); 
 
+let auth = require('./auth')(app);
+require('./passport');    
 //GET request for returning the JSON movie data
 
   app.get('/movies', (req, res) => {
