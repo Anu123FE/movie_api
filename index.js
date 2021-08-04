@@ -4,11 +4,7 @@ const bodyParser = require('body-parser');
 
 const Movie = Models.Movie;
 const Users = Models.User;
-mongoose.connect('mongodb://localhost:27017/moviedb', { useNewUrlParser: true, useUnifiedTopology: true });
-//Make Mongoose use `findOneAndUpdate()`. Note that this option is `true`
-// by default, you need to set it to false.
-mongoose.set('useFindAndModify', false);
-
+mongoose.connect('mongodb://localhost:27017/moviedb', { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
 
 const express = require('express');
       morgan = require('morgan');
@@ -62,16 +58,17 @@ app.use((err, req, res, next) => {
   //}).catch(err=>res.status(404).send(err.message));
 //});
 
+
 //For returning data about the genre by Name
 app.get('/movies/genre/:Name', (req, res) => {
-  Movie.find({"Genre.Name" : req.params.Name}).then(movie=>{
+  Movie.findOne({"Genre.Name" : req.params.Name}).then(movie=>{
   res.status(200).send(movie.Genre);
 }).catch(err=>res.status(404).send(err.message));
 });
 
 //For returning data about a director by name
 app.get('/movies/director/:Name', (req, res) => {
-    Movie.find({"Director.Name" : req.params.Name}).then(movie=>{
+    Movie.findOne({"Director.Name" : req.params.Name}).then(movie=>{
       res.status(200).send(movie.Director);
     }).catch(err=>res.status(404).send(err.message));
 });
@@ -130,7 +127,7 @@ app.get('/user/:Username', (req, res) => {
 
 //For allowing users to update their user info by searching by Username
 app.put('/users/:Username', (req, res) => {
-  Users.findOneAndUpdate({ USername: req.params.Username }, { $set: 
+  Users.findOneAndUpdate({ Username: req.params.Username }, { $set: 
     {
       Username: req.body.Username,
       Password: req.body.Password,
