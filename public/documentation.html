@@ -70,77 +70,27 @@
                 <td>GET</td>
                 <td>:Name</td>
                 <td>None</td>
-                <td>An array containing movies belonging to a specific genre. Example: <br>
-                    [
-                      {
-                        "Genre": {
-                           "Name": "Action",
-                           "Description": "Action film is a film genre in which the protagonist or protagonists are thrust into a series of events that typically include violence, extended fighting, physical feats, rescues and frantic chases. Action films tend to feature a mostly resourceful hero struggling against incredible odds, which include life-threatening situations, a dangerous villain, or a pursuit which usually concludes in victory for the hero (though a small number of films in this genre have ended in the victory for the villain instead)."
-                                  },
-                        "Director": {
-                           "Name": "Chad Stahelski",
-                           "Bio": "Chad Stahelski is an American stuntman and film director. He is known for his work on Buffy the Vampire Slayer and directing the 2014 film John Wick along with David Leitch, as well as solo directing its two sequels.",
-                           "Birth": "September 20, 1968",
-                           "Death": ""
-                                    },
-                        "Actors": [],
-                        "_id": "604fb2dd3c12eaccf1a9f250",
-                        "Title": "John Wick",
-                        "Description": "A retired hitman seeking vengeance for the killing of the dog given to him by his recently deceased wife, and for stealing his car.",
-                        "ImagePath": "https://www.imdb.com/title/tt2911666/mediaviewer/rm1723909376/",
-                        "Featured": true
-                     },<br>
-                  {
-                      "Genre": {
-                          "Name": "Action",
-                          "Description": "Action film is a film genre in which the protagonist or protagonists are thrust into a series of events that typically include violence, extended fighting, physical feats, rescues and frantic chases. Action films tend to feature a mostly resourceful hero struggling against incredible odds, which include life-threatening situations, a dangerous villain, or a pursuit which usually concludes in victory for the hero (though a small number of films in this genre have ended in the victory for the villain instead)."
-                               },
-                      "Director": {
-                          "Name": "Joe Russo",
-                           "Bio": "Anthony Russo and Joseph Russo collectively known as the Russo brothers (ROO-so), are American directors, producers, screenwriters, and actors. They direct most of their work together.",
-                           "Birth": "July 8, 1971",
-                            "Death": ""
-                                   },
-                           "Actors": [],
-                           "_id": "604fb2d23c12eaccf1a9f24f",
-                           "Title": "Avengers Infinity War",
-                           "Description": "The Avengers must stop Thanos, an intergalactic warlord, from getting his hands on all the infinity stones. However, Thanos is prepared to go to any lengths to carry out his insane plan.",
-                            "ImagePath": "https://www.imdb.com/title/tt4154756/mediaviewer/rm4044245504/",
-                            "Featured": false
-                   }<br>
-                ]<br>
-                </td>
+                <td>A JSON format response containing the description of the specific genre. Example: <br>
+                    {
+                        "Name": "Thriller",
+                        "Description": "Thriller film, also known as suspense film or suspense thriller, is a broad film genre that evokes excitement and suspense in the audience.[1] The suspense element found in most films' plots is particularly exploited by the filmmaker in this genre. Tension is created by delaying what the audience sees as inevitable, and is built through situations that are menacing or where escape seems impossible."
+                    }
+               </td>
             </tr>
             
             <tr>
                 <td>Return data about a director by name</td>
                 <td>/movies/director/[Name]</td>
                 <td>GET</td>
-                <td>:director</td>
+                <td>:Name</td>
                 <td>None</td>
                 <td>A JSON format data holding all the data about a director by name. Example:<br>
                     {
-                        name: 'Christopher Nolan',
-                        bio: 'A short Bio',
-                        dob: '30th July'
-                      }
-                    </td>
-            </tr>
-
-
-
-            <tr>
-                <td>Return data about a director by name</td>
-                <td>/movies/director/[Name]</td>
-                <td>GET</td>
-                <td>:director</td>
-                <td>None</td>
-                <td>A JSON format data holding all the data about a director by name. Example:<br>
-                    {
-                        name: 'Christopher Nolan',
-                        bio: 'A short Bio',
-                        dob: '30th July'
-                      }
+                        "Name": "Christopher Nolan",
+                        "Bio": "Christopher Edward Nolan CBE is a British-American film director, producer, and screenwriter. His directorial efforts have grossed more than US$5 billion worldwide, garnered 36 Oscar nominations and ten wins. Born and raised in London, Nolan developed an interest in filmmaking from a young age.",
+                        "Birth": "July 30, 1970",
+                        "Death": ""
+                    }
                     </td>
             </tr>
 
@@ -213,11 +163,23 @@
 
             <tr>
                 <td>Allow users to update their user info</td>
-                <td>/users/update/[id]]</td>
+                <td>/users/update/[Username]</td>
                 <td>PUT</td>
-                <td>:id</td>
-                <td>Data containing changes to old profile</td>
-                <td>A text response indicating that the changes were successfully deployed</td>
+                <td>:Username</td>
+                <td>JSON data containing changes to old profile</td>
+                <td>A JSON format response with the user's profile details including the newly updated data like so: <br>
+                    {
+                        "FavoriteMovies": [
+                            "604fb3063c12eaccf1a9f253",
+                            "604fb2f53c12eaccf1a9f252"
+                        ],
+                        "_id": "604fc86c3c12eaccf1a9f25b",
+                        "Username": "jondoe4",
+                        "Password": "passcode-1-update",
+                        "Email": "jondoe4a@yahoo.com",
+                        "Birthday": "1990-01-01T00:00:00.000Z"
+                    }
+                </td>
             </tr>
 
             <tr>
