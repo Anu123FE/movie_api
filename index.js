@@ -17,6 +17,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('common'));
 app.use(express.json()); 
 
+const cors = require('cors');
+app.use(cors());
+
 let auth = require('./auth')(app);
 require('./passport');    
 //GET request for returning the JSON movie data
@@ -77,6 +80,7 @@ app.get('/movies/director/:Name', passport.authenticate('jwt', { session: false 
 
 //For allowing new users to register
 app.post('/users/register', (req, res) => {
+  let hashedPassword = Users.hashPassword(req.body.Password);
   Users.findOne({ Username: req.body.Username})
      .then((user) => {
        if (user) {
@@ -85,7 +89,7 @@ app.post('/users/register', (req, res) => {
            Users
              .create({
                Username: req.body.Username,
-               Password: req.body.Password,
+               Password: hashedPassword,
                Email: req.body.Email,
                Birthday: req.body.Birthday
              })
