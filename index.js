@@ -2,10 +2,13 @@ const mongoose = require('mongoose');
 const Models = require('./models.js');
 const bodyParser = require('body-parser');
 const passport = require('passport');
+const { check, validationResult} = require('express-validator');
+
 
 const Movie = Models.Movie;
 const Users = Models.User;
-mongoose.connect('mongodb://localhost:27017/moviedb', { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
+//mongoose.connect('mongodb://localhost:27017/moviedb', { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
+mongoose.connect('mongodb+srv://dbAnu:passw0rd@cluster0.w1fyk.mongodb.net/myFirstDatabase?retryWrites=true&w=majority');
 
 const express = require('express');
       morgan = require('morgan');
@@ -23,7 +26,14 @@ app.use(cors());
 let auth = require('./auth')(app);
 require('./passport');    
 //GET request for returning the JSON movie data
- 
+const validate = [
+
+  check('Username', 'Username must be more than 3 characters').isLength({min:3}),
+  check('Username', 'Username must be more than 3 characters').not().isEmpty(),
+  check('Password', 'Password must be more than 3 characters').isLength({min:3}),
+  check('Password', 'Password must be more than 3 characters').not().isEmpty(),
+  check('Email', 'Email must be more than 3 characters').isEmail()
+  ]
 app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
     Movie.find().then(movie=>{
 
@@ -79,7 +89,7 @@ app.get('/movies/director/:Name', passport.authenticate('jwt', { session: false 
 });
 
 //For allowing new users to register
-app.post('/users/register', (req, res) => {
+app.post('/users/register', validate, (req, res) => {
   let hashedPassword = Users.hashPassword(req.body.Password);
   Users.findOne({ Username: req.body.Username})
      .then((user) => {
@@ -132,7 +142,7 @@ app.get('/user/:Username', passport.authenticate('jwt', { session: false }), (re
 });
 
 //For allowing users to update their user info by searching by Username
-app.put('/users/:Username', passport.authenticate('jwt', { session: false }), (req, res) => {
+app.put('/users/:Username', passport.authenticate('jwt', { session: false }), validate, (req, res) => {
   Users.findOneAndUpdate({ Username: req.params.Username }, { $set: 
     {
       Username: req.body.Username,
