@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 let movieSchema = mongoose.Schema({
     Title: {type: String, required: true},
@@ -22,7 +23,14 @@ let movieSchema = mongoose.Schema({
     Birthday: Date,
     FavoriteMovies: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Movie' }]
   });
-  
+  //Before saving the data, I want to use bcrypt to ask the password in the userSchema
+  userSchema.statics.hashPassword = (password) =>{
+    return bcrypt.hashSync(password, 10)
+  };
+
+  userSchema.methods.validatePassword = (password, hashedPassword) =>{
+    return bcrypt.compareSync(password, hashedPassword)
+  };
   let Movie = mongoose.model('Movie', movieSchema);
   let User = mongoose.model('User', userSchema);
   
