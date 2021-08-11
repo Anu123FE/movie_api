@@ -4,7 +4,8 @@ const bodyParser = require('body-parser');
 
 const Movie = Models.Movie;
 const Users = Models.User;
-mongoose.connect('mongodb://localhost:27017/moviedb', { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
+//mongoose.connect('mongodb://localhost:27017/moviedb', { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
+mongoose.connect('mongodb+srv://dbAnu:passw0rd@cluster0.w1fyk.mongodb.net/moviedb', { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
 
 const express = require('express');
       morgan = require('morgan');
