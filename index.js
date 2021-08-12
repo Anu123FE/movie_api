@@ -35,6 +35,8 @@ const validate = [
   check('Email', 'Email must be more than 3 characters').isEmail()
   ]
 app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
+    let errors = validationResult(req);
+    if (errors) return res.status(422).json({'error' : errors.array()})
     Movie.find().then(movie=>{
 
       res.status(200).send(movie)
