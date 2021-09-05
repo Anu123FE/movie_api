@@ -35,12 +35,8 @@ const validate = [
   check('Email', 'Email must be more than 3 characters').isEmail()
   ]
 app.get('/movies', (req, res) => {
-    let errors = validationResult(req);
-    if (errors) return res.status(422).json({'error' : errors.array()})
-    Movie.find().then(movie=>{
-
+  Movie.find().then(movie=>{
       res.status(200).send(movie)
-      
     }).catch(err=>res.status(404).send(err.message))
   });
 
