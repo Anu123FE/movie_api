@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,7 +12,7 @@
       <h1>Title of API:Flicks At Clicks!</h1><br>
     </header>
 
-     <h2>Description: A REST API for an application that interacts with a database that stores data for different movies. This app is published <a href="https://movie-api-v001.herokuapp.com/">Here</a></h2><br>
+     <h2>Description: A REST API for an application that interacts with a database that stores data for different movies. This app is published <a href="https://movie-api-v001.herokuapp.com/">here</a></h2><br>
 
     <table class="styled-table">
         <thead>
