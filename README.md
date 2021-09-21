@@ -13,7 +13,7 @@ Screenshot2-Documentation: ![image](https://user-images.githubusercontent.com/80
 
 Languages Used: HTML, CSS, JS. Have also used MongoDB, Mongo Atlas, Express and NodeJS
 
-App Published Remotely on: Heroku (https://aqueous-temple-90442.herokuapp.com)
+App Published Remotely on: Heroku (https://movie-api-v001.herokuapp.com/)
 
 Credits: Author: Anu Nair (https://github.com/Anu123FE)
 
