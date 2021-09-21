@@ -12,7 +12,7 @@
       <h1>Title of API:Flicks At Clicks!</h1><br>
     </header>
 
-     <h2>Description: A REST API for an application that interacts with a database that stores data for different movies. This app is published <a href="https://aqueous-temple-90442.herokuapp.com">Here</a></h2><br>
+     <h2>Description: A REST API for an application that interacts with a database that stores data for different movies. This app is published <a href="https://movie-api-v001.herokuapp.com/">Here</a></h2><br>
 
     <table class="styled-table">
         <thead>
@@ -130,6 +130,17 @@
                         Email: String,
                         Birthday: Date
                     }
+                </td>
+            </tr>
+            
+            <tr>
+                <td>Allow registered users to login</td>
+                <td>/login</td>
+                <td>POST</td>
+                <td>:login</td>
+                <td>Data containing Username and Password</td>
+                <td>If authentication is verified, the user is taken to movies page, if authentication fails, a message shows up 
+                    "No Such User"
                 </td>
             </tr>
 
