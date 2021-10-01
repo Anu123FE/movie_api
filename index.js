@@ -26,14 +26,6 @@ app.use(cors());
 let auth = require('./auth')(app);
 require('./passport');    
 //GET request for returning the JSON movie data
-const validate = [
-
-  check('Username', 'Username must be more than 3 characters').isLength({min:3}),
-  check('Username', 'Username must be more than 3 characters').not().isEmpty(),
-  check('Password', 'Password must be more than 3 characters').isLength({min:3}),
-  check('Password', 'Password must be more than 3 characters').not().isEmpty(),
-  check('Email', 'Email must be more than 3 characters').isEmail()
-  ]
 app.get('/movies', (req, res) => {
   Movie.find().then(movie=>{
       res.status(200).send(movie)
@@ -143,8 +135,6 @@ app.get('/user/:Username', passport.authenticate('jwt', { session: false }), (re
 
 //For allowing users to update their user info by searching by Username
 app.put('/users/:Username', passport.authenticate('jwt', { session: false }), validate, (req, res) => {
-  let errors = validationResult(req);
-  if (errors) return res.status(422).json({'error' : errors.array()})
   Users.findOneAndUpdate({ Username: req.params.Username }, { $set: 
     {
       Username: req.body.Username,
@@ -166,8 +156,6 @@ app.put('/users/:Username', passport.authenticate('jwt', { session: false }), va
 
 //For allowing users to add a movie to their list of favorite movies
 app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { session: false }), (req, res) => {
-  let errors = validationResult(req);
-    if (errors) return res.status(422).json({'error' : errors.array()})
   Users.findOneAndUpdate({ Username: req.params.Username }, {
     $push: { FavoriteMovies: req.params.MovieID }
   },
@@ -184,8 +172,6 @@ app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { sess
 
 //For allowing users to remove a movie from their list of favorites movies
   app.delete('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { session: false }), (req, res) => {
-    let errors = validationResult(req);
-    if (errors) return res.status(422).json({'error' : errors.array()})
     Users.findOneAndUpdate({ Username: req.params.Username }, {
       $pull: { FavoriteMovies: req.params.MovieID }
     },
@@ -202,8 +188,6 @@ app.post('/users/:Username/movies/:MovieID', passport.authenticate('jwt', { sess
 
 //For allowing existing users to deregister
 app.delete('/users/:Username', (req, res) => {
-  let errors = validationResult(req);
-    if (errors) return res.status(422).json({'error' : errors.array()})
   Users.findOneAndRemove({ Username: req.params.Username })
   .then((user) => {
     if (!user) {
