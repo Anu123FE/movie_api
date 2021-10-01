@@ -134,7 +134,7 @@ app.get('/user/:Username', passport.authenticate('jwt', { session: false }), (re
 });
 
 //For allowing users to update their user info by searching by Username
-app.put('/users/:Username', passport.authenticate('jwt', { session: false }), validate, (req, res) => {
+app.put('/users/:Username', passport.authenticate('jwt', { session: false }), (req, res) => {
   Users.findOneAndUpdate({ Username: req.params.Username }, { $set: 
     {
       Username: req.body.Username,
