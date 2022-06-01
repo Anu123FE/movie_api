@@ -43,10 +43,6 @@ Starting from scratch and not having a technical background were the major chall
 
 - Delete User Profile: <img width="1228" alt="Delete User" src="https://user-images.githubusercontent.com/80176993/171304426-270a6ed1-690f-4a94-83ce-3faa92966961.png">
 
-- 
-
-
-
 # Languages Used: 
 - HTML, CSS, JS. Have also used MongoDB, Mongo Atlas, Express, NodeJS, Mongoose
 
