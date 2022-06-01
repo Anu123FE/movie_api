@@ -30,6 +30,7 @@ Starting from scratch and not having a technical background were the major chall
 - It was particularly difficult loading the database (collections) in MongoDB, but once that was done, it was easy to keep the database structured, organised and uniform
 - I faced a lot of issues due to bugs while trying to publish the app on Heroku, especially due to a clash between the version I was using. I learnt that it is extremely important to use the latest version of Heroku so that it works without a glitch.
 - Also, the version of the nodejs being used affects heroku.
+- I had missed setting CORS in Express to allow for all origins which initially caused me to run into some issues, but I resolved this once I realised the basis of the error.
 
 # Screenshots Included: 
 
@@ -48,7 +49,25 @@ Starting from scratch and not having a technical background were the major chall
 - Get All Movies:
 <img width="1229" alt="Get all movies" src="https://user-images.githubusercontent.com/80176993/171305694-287d0b29-3083-447d-a1dc-bb629e9226e3.png">
 
-- 
+# Process Flow:
+- MongoDB Database
+Install Mongo shell and then the collections are created - movies (with movie name, synopsis, genre, director) and users (register users with their username, email id, birthdate, password and favorite movies list as their credentials)
+10 movies added as documents
+
+- Using Mongoose (Business Logic)
+Mongoose is used to connect the database from MongoDB to the server.
+
+# Authentication - using Passport:
+- Basic HTTP authentication for all 1st logins
+- Bearer Token Generation
+
+# MongoDBAtlas (Database) and HEROKU
+Steps
+- register with heroku
+- create Heroku app
+- create mongodb on MongoDBAtlas
+- export MongoDB database (JSON Collections)
+- push Git main to Heroku
 
 # Languages Used: 
 - HTML, CSS, JS. Have also used MongoDB, Mongo Atlas, Express, NodeJS, Mongoose
