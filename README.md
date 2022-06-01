@@ -43,6 +43,11 @@ Starting from scratch and not having a technical background were the major chall
 
 - Delete User Profile: <img width="1228" alt="Delete User" src="https://user-images.githubusercontent.com/80176993/171304426-270a6ed1-690f-4a94-83ce-3faa92966961.png">
 
+- Get All Movies:
+<img width="1229" alt="Get all movies" src="https://user-images.githubusercontent.com/80176993/171305694-287d0b29-3083-447d-a1dc-bb629e9226e3.png">
+
+- 
+
 # Languages Used: 
 - HTML, CSS, JS. Have also used MongoDB, Mongo Atlas, Express, NodeJS, Mongoose
 
