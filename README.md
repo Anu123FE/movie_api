@@ -37,6 +37,8 @@ Starting from scratch and not having a technical background were the major chall
 
 - Screenshot2-Documentation: ![image](https://user-images.githubusercontent.com/80176993/129423386-9bb0c22d-790b-4e5d-922a-50b4aef0aeb8.png)
 
+-Register (New User): <img width="1211" alt="Register new user" src="https://user-images.githubusercontent.com/80176993/171306264-b653572e-97d1-499a-ba3b-c63e3776cbc4.png">
+
 - Register (if duplicate): <img width="855" alt="Register Endoint (duplicate user)" src="https://user-images.githubusercontent.com/80176993/171303905-6fb6767a-7cfb-4e70-a75e-ce3f95dd1606.png">
 
 - Login: <img width="1233" alt="Login Endpoint" src="https://user-images.githubusercontent.com/80176993/171304063-27fad69d-0f13-4e5e-8dbc-a22c2b776e76.png">
