@@ -38,7 +38,7 @@ Starting from scratch and not having a technical background were the major chall
 
 - Screenshot2-Documentation: ![image](https://user-images.githubusercontent.com/80176993/129423386-9bb0c22d-790b-4e5d-922a-50b4aef0aeb8.png)
 
--Register (New User): <img width="1211" alt="Register new user" src="https://user-images.githubusercontent.com/80176993/171306264-b653572e-97d1-499a-ba3b-c63e3776cbc4.png">
+- Register (New User): <img width="1211" alt="Register new user" src="https://user-images.githubusercontent.com/80176993/171306264-b653572e-97d1-499a-ba3b-c63e3776cbc4.png">
 
 - Register (if duplicate): <img width="855" alt="Register Endoint (duplicate user)" src="https://user-images.githubusercontent.com/80176993/171303905-6fb6767a-7cfb-4e70-a75e-ce3f95dd1606.png">
 
@@ -48,6 +48,22 @@ Starting from scratch and not having a technical background were the major chall
 
 - Get All Movies:
 <img width="1229" alt="Get all movies" src="https://user-images.githubusercontent.com/80176993/171305694-287d0b29-3083-447d-a1dc-bb629e9226e3.png">
+
+# Step By Step Set Up:
+ ● Set up your project directory
+ ● Set up Node.js syntax
+ ● Create a “package.json” file
+ ● Import all necessary packages into project directory
+ ● Project dependencies set up 
+ ● Route HTTP requests for the project using Express
+ ● Define the endpoints for the REST API
+ ● Create a relational (SQL) database for storing movie data using PostgreSQL
+ ● Recreate the relational (SQL) database as a non-relational (NoSQL) database using MongoDB
+ ● Model the business logic using Mongoose
+ ● Implement authentication and authorization into the API using basic HTTP authentication and JWT (token-based) authentication
+ ● Incorporate data validation logic into the API
+ ● Implement data security and storage controls
+ ● Host the project on the web using Heroku
 
 # Process Flow:
 - MongoDB Database
