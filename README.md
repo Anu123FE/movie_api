@@ -1,7 +1,7 @@
 # Project name: movie_api
 
 # Description: 
-- A movie app that shows the best 10 movies along with all the details and enables users to create and modify their own favrite movie lists.
+- A movie app that shows the best 10 movies along with all the details and enables users to create and modify their own favorite movie lists.
 
 # Technology Used:
  - Used Backend Tech (NodeJs, MongoDB, Express) with FrontEnd Tech (React). This projct was done to target learning the MERN stack. This is one of the      best options that can be used to combine Front End and Back End Tech and hence I opted for this.
